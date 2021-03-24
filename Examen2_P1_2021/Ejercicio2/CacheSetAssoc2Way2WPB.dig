@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<circuit>
+  <version>1</version>
+  <attributes/>
+  <visualElements>
+    <visualElement>
+      <elementName>External</elementName>
+      <elementAttributes>
+        <entry>
+          <string>applicationType</string>
+          <appType>IVERILOG</appType>
+        </entry>
+        <entry>
+          <string>Label</string>
+          <string>CacheSaMwMemory</string>
+        </entry>
+        <entry>
+          <string>externalInputs</string>
+          <string>addr:9</string>
+        </entry>
+        <entry>
+          <string>Code</string>
+          <string>module CacheSaMwMemory(
+    input [8:0] addr,
+    output w0valid,
+    output [19:0] w0tag,
+    output [31:0] w0word0,
+    output [31:0] w0word1,
+    output w1valid,
+    output [19:0] w1tag,
+    output [31:0] w1word0,
+    output [31:0] w1word1
+);
+
+    reg [169:0] memory [0:511];    
+    wire [169:0] data;
+    
+    assign data = memory[addr];
+    
+    assign w0valid = data[169];
+    assign w1valid = data[168];
+    assign w0tag = data[167:148];
+    assign w1tag = data[147:128];
+    
+    assign w0word0 = data[127:96];
+    assign w0word1 = data[95:64];
+    assign w1word0 = data[63:32];
+    assign w1word1 = data[31:0];
+    
+    initial
+    begin
+        memory[1] = 170&apos;h3_00000_00001_000000e7_000000e8_000000a7_000000a8;
+    end
+    
+endmodule</string>
+        </entry>
+        <entry>
+          <string>externalOutputs</string>
+          <string>w0valid,w0tag:20,w0word0:32,w0word1:32,w1valid,w1tag:20,w1word0:32,w1word1:32</string>
+        </entry>
+        <entry>
+          <string>Width</string>
+          <int>6</int>
+        </entry>
+      </elementAttributes>
+      <pos x="860" y="280"/>
+    </visualElement>
+  </visualElements>
+  <wires/>
+  <measurementOrdering/>
+</circuit>
